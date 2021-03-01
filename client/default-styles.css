@@ -1,22 +1,28 @@
 :root {
-	--main-bg-color: #070707;
-	--secondary-bg-color: #553555;
-	--main-fg-color: #ADF1D2;
-	--secondary-fg-color: #A9AFD1;
+	--main-bg-color: #332c50;
+	--secondary-bg-color: #46878f;
+	--main-fg-color: #94e344;
+	--secondary-fg-color: #e2f3e4;
 }
 
 body {
 	background-color: var(--main-bg-color);
 	color: var(--main-fg-color);
 	text-align: center;
-	font-family: 'Source Code Pro', monospace;
+	font-family: 'Press Start 2P', sans-serif;
+	font-size: 1rem;
 	width: 50%;
 	margin-left: 25%;
 	margin-right: 25%;
 }
 
 h1 {
-	font-size: 4rem;
+	font-size: 2.5rem;
+	color: var(--secondary-fg-color);
+}
+
+h2 {
+	font-size: 1.5rem;
 }
 
 .form {
@@ -26,6 +32,10 @@ h1 {
 	padding: 20px;
 	border-radius: 20px;
 	margin-bottom: 20px;
+}
+
+#error {
+	color: red;
 }
 
 hr {
@@ -63,9 +73,9 @@ button:hover {
 a {
 	background-color: var(--secondary-bg-color);
 	color: var(--secondary-fg-color);
-	font-size: 1.5em;
+	font-size: 1rem;
 	transition-duration: 0.2s;
-	padding: 10px;
+	padding: 5px;
 	border-radius: 10px;
 	text-decoration: none;
 }
