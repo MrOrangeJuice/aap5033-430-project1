@@ -17,7 +17,7 @@ const urlStruct = {
   '/app': htmlHandler.getBombApp,
   '/random': htmlHandler.getBombRandom,
   '/admin': htmlHandler.getBombAdmin,
-  '/css': htmlHandler.getDefaultCSS,
+  '/default-styles': htmlHandler.getDefaultCSS,
   notFound: htmlHandler.get404Response,
 };
 
