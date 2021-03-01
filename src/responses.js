@@ -148,7 +148,7 @@ const getRandomGame = (limit = 1, request, response, type) => {
       title: games[number].title,
       developer: games[number].developer,
       year: games[number].year,
-      url: games[number].url
+      url: games[number].url,
     });
   }
   if (type === 'text/xml') {
