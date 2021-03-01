@@ -41,6 +41,11 @@ h2 {
 	transition-duration: 0.2s;
 }
 
+.boxart {
+	width: 60%;
+	margin: 10px;
+}
+
 ul {
 	list-style-type: none;
 	margin: 0;

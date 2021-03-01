@@ -3,91 +3,109 @@ const games = [
     title: 'Super Mario Land',
     developer: 'Nintendo',
     year: '1989',
+    url: '/mario-land',
   },
   {
     title: 'Alleyway',
     developer: 'Intelligent Systems',
     year: '1989',
+    url: '/red',
   },
   {
     title: 'Game and Watch Gallery',
     developer: 'Nintendo',
     year: '1997',
+    url: '/gallery',
   },
   {
     title: 'Mega Man 2',
     developer: 'Capcom',
     year: '1992',
+    url: '/mm2',
   },
   {
     title: 'Mega Man 3',
     developer: 'Capcom',
     year: '1993',
+    url: '/mm3',
   },
   {
     title: 'Mega Man 4',
     developer: 'Capcom',
     year: '1994',
+    url: '/mm4',
   },
   {
     title: 'Mega Man 5',
     developer: 'Capcom',
     year: '1994',
+    url: '/mm5',
   },
   {
-    title: 'X',
-    developer: 'Nintendo',
+    title: "Kirby's Dream Land",
+    developer: 'HAL Laboratory',
     year: '1992',
+    url: '/kirby',
   },
   {
     title: 'Super Mario Land 2: 6 Golden Coins',
     developer: 'Nintendo',
     year: '1992',
+    url: '/mario-land-2',
   },
   {
     title: 'Tetris',
     developer: 'Nintendo',
     year: '1989',
+    url: '/tetris',
   },
   {
     title: 'Kid Dracula',
     developer: 'Konami',
     year: '1993',
+    url: '/red',
   },
   {
     title: 'Space Invaders',
     developer: 'Taito',
     year: '1994',
+    url: '/red',
   },
   {
     title: 'Metroid 2: Return of Samus',
     developer: 'Nintendo',
     year: '1991',
+    url: '/red',
   },
   {
-    title: 'Super Mario Land 3: Wario Land',
+    title: 'Wario Land: Super Mario Land 3',
     developer: 'Nintendo',
     year: '1994',
+    url: '/wario-land',
   },
   {
     title: 'Pokemon Red',
     developer: 'Game Freak',
     year: '1997',
+    url: '/red',
   },
   {
     title: 'Pokemon Blue',
     developer: 'Game Freak',
     year: '1989',
+    url: '/blue',
   },
   {
     title: 'Donkey Kong',
     developer: 'Nintendo',
     year: '1994',
+    url: '/dk',
   },
   {
     title: 'Final Fantasy Adventure',
     developer: 'Square',
     year: '1992',
+    url: '/red',
   },
 ];
 
@@ -130,6 +148,7 @@ const getRandomGame = (limit = 1, request, response, type) => {
       title: games[number].title,
       developer: games[number].developer,
       year: games[number].year,
+      url: games[number].url
     });
   }
   if (type === 'text/xml') {
@@ -141,6 +160,7 @@ const getRandomGame = (limit = 1, request, response, type) => {
           <title>${games[number].title}</title>
           <developer>${games[number].developer}</developer>
           <year>${games[number].year}</year>
+          <url>${games[number].url}</url>
         </game>
         `;
     }

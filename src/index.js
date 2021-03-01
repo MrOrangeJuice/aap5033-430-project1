@@ -18,6 +18,20 @@ const urlStruct = {
   '/random': htmlHandler.getBombRandom,
   '/admin': htmlHandler.getBombAdmin,
   '/default-styles': htmlHandler.getDefaultCSS,
+  '/red': htmlHandler.getRedImg,
+  '/blue': htmlHandler.getBlueImg,
+  '/mario-land': htmlHandler.getMarioLandImg,
+  '/mario-land-2': htmlHandler.getMarioLand2Img,
+  '/wario-land': htmlHandler.getWarioLandImg,
+  '/kirby': htmlHandler.getKirbyImg,
+  '/tetris': htmlHandler.getTetrisImg,
+  '/gallery': htmlHandler.getGalleryImg,
+  '/dk': htmlHandler.getDK94Img,
+  '/mm2': htmlHandler.getMM2Img,
+  '/mm3': htmlHandler.getMM3Img,
+  '/mm4': htmlHandler.getMM4Img,
+  '/mm5': htmlHandler.getMM5Img,
+
   notFound: htmlHandler.get404Response,
 };
 

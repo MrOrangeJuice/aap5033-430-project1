@@ -15,6 +15,7 @@
         // now go ahead and update #gameContainer
         document.querySelector('#gameContainer').innerHTML = `
         <div class="game">
+            <img src="${obj[0].url}" alt="${obj[0].title} Box Art" class="boxart"><br>
             <b>${obj[0].title}</b><br>
             <b>${obj[0].developer}</b><br>
             <b>${obj[0].year}</b>
@@ -33,6 +34,7 @@
         {
             responseString += `
             <div class="game">
+              <img src="${obj[i].url}" alt="${obj[i].title} Box Art" class="boxart"><br>
               <b>${obj[i].title}</b><br>
               <b>${obj[i].developer}</b><br>
               <b>${obj[i].year}</b>
