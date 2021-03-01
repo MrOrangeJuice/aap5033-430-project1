@@ -60,79 +60,79 @@ const getRedImg = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/png' });
   response.write(redImg);
   response.end();
-}
+};
 
 const getBlueImg = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/png' });
   response.write(blueImg);
   response.end();
-}
+};
 
 const getMarioLandImg = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/jpeg' });
   response.write(marioLandImg);
   response.end();
-}
+};
 
 const getMarioLand2Img = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/jpeg' });
   response.write(marioLand2Img);
   response.end();
-}
+};
 
 const getWarioLandImg = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/png' });
   response.write(warioLandImg);
   response.end();
-}
+};
 
 const getKirbyImg = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/png' });
   response.write(kirbyImg);
   response.end();
-}
+};
 
 const getTetrisImg = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/jpeg' });
   response.write(tetrisImg);
   response.end();
-}
+};
 
 const getGalleryImg = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/png' });
   response.write(galleryImg);
   response.end();
-}
+};
 
 const getDK94Img = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/jpeg' });
   response.write(dk94Img);
   response.end();
-}
+};
 
 const getMM2Img = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/png' });
   response.write(mm2Img);
   response.end();
-}
+};
 
 const getMM3Img = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/png' });
   response.write(mm3Img);
   response.end();
-}
+};
 
 const getMM4Img = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/png' });
   response.write(mm4Img);
   response.end();
-}
+};
 
 const getMM5Img = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'image/png' });
   response.write(mm5Img);
   response.end();
-}
+};
 
 module.exports.get404Response = get404Response;
 module.exports.getBombHome = getBombHome;
@@ -151,5 +151,5 @@ module.exports.getGalleryImg = getGalleryImg;
 module.exports.getDK94Img = getDK94Img;
 module.exports.getMM2Img = getMM2Img;
 module.exports.getMM3Img = getMM3Img;
-module.exports.getMM4Img = getMM5Img;
+module.exports.getMM4Img = getMM4Img;
 module.exports.getMM5Img = getMM5Img;
