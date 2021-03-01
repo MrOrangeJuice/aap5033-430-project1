@@ -1,47 +1,55 @@
-const jokes = [
+const games = [
   {
-    q: 'What do you call a very small valentine?',
-    a: 'A valen-tiny!',
+    title: 'Super Mario Land',
+    year: '1989',
   },
   {
-    q: 'What did the dog say when he rubbed his tail on the sandpaper?',
-    a: 'Ruff, Ruff!',
+    title: 'X',
+    year: '1992',
   },
   {
-    q: "Why don't sharks like to eat clowns?",
-    a: 'Because they taste funny!',
+    title: 'Super Mario Land 2: 6 Golden Coins',
+    year: '1992',
   },
   {
-    q: 'What did the boy cat say to the girl cat?',
-    a: "You're Purr-fect!",
+    title: 'Tetris',
+    year: '1989',
   },
   {
-    q: "What is a frog's favorite outdoor sport?",
-    a: 'Fly Fishing!',
+    title: 'Kid Dracula',
+    year: '1993',
   },
   {
-    q: 'I hate jokes about German sausages.',
-    a: 'Theyre the wurst.',
+    title: 'Space Invaders',
+    year: '1994',
   },
   {
-    q: 'Did you hear about the cheese factory that exploded in France?',
-    a: 'There was nothing left but de Brie.',
+    title: 'Metroid 2: Return of Samus',
+    year: '1991',
   },
   {
-    q: 'Our wedding was so beautiful',
-    a: 'Even the cake was in tiers.',
+    title: 'Super Mario Land 3: Wario Land',
+    year: '1994',
   },
   {
-    q: 'Is this pool safe for diving?',
-    a: 'It deep ends.',
+    title: 'Pokemon Red',
+    year: '1997',
   },
   {
-    q: 'Dad, can you put my shoes on?',
-    a: 'I dont think theyll fit me.',
+    title: 'Pokemon Blue',
+    year: '1989',
+  },
+  {
+    title: 'Donkey Kong',
+    year: '1994',
+  },
+  {
+    title: 'Final Fantasy Adventure',
+    year: '1992',
   },
 ];
 
-const getRandomJokeResponse = (request, response, params, acceptedTypes, httpMethod) => {
+const getRandomGameResponse = (request, response, params, acceptedTypes, httpMethod) => {
   let type = 'application/json';
   if (acceptedTypes.includes('text/xml')) {
     type = 'text/xml';
@@ -60,14 +68,14 @@ const getRandomJokeResponse = (request, response, params, acceptedTypes, httpMet
     response.writeHead(200, headers);
   } else {
     response.writeHead(200, { 'Content-Type': type });
-    response.write(getRandomJoke(params.limit, request, response, type));
+    response.write(getRandomGame(params.limit, request, response, type));
     response.end();
   }
 };
 
 // 6 - this will return a random number no bigger than `max`, as a string
 // we will also doing our query parameter validation here
-const getRandomJoke = (limit = 1, request, response, type) => {
+const getRandomGame = (limit = 1, request, response, type) => {
   let limit2 = Number(limit);
   limit2 = !limit2 ? 1 : limit2;
   limit2 = limit2 < 1 ? 1 : limit2;
@@ -77,26 +85,26 @@ const getRandomJoke = (limit = 1, request, response, type) => {
   for (let i = 0; i < limit2; i += 1) {
     number = Math.floor(Math.random() * max);
     responseObj.push({
-      question: jokes[number].q,
-      answer: jokes[number].a,
+      title: games[number].title,
+      year: games[number].year,
     });
   }
   if (type === 'text/xml') {
-    let responseXML = '<jokes>';
+    let responseXML = '<games>';
     for (let i = 0; i < limit2; i += 1) {
       number = Math.floor(Math.random() * max);
       responseXML += `
-      <joke>
-        <q>${jokes[number].q}</q>
-        <a>${jokes[number].a}</a>
-      </joke>
-      `;
+        <game>
+          <q>${games[number].title}</q>
+          <a>${games[number].year}</a>
+        </game>
+        `;
     }
-    responseXML += '</jokes>';
+    responseXML += '</games>';
     return responseXML; // bail out
   }
 
   return JSON.stringify(responseObj);
 };
 
-module.exports.getRandomJokeResponse = getRandomJokeResponse;
+module.exports.getRandomGameResponse = getRandomGameResponse;

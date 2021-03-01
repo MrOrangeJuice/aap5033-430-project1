@@ -11,9 +11,13 @@ const htmlHandler = require('./htmlResponses');
 const jsonHandler = require('./responses');
 
 const urlStruct = {
-  '/random-joke': jsonHandler.getRandomJokeResponse,
-  '/random-jokes': jsonHandler.getRandomJokeResponse,
-  '/joke-client': htmlHandler.getJokeClient,
+  '/random-game': jsonHandler.getRandomGameResponse,
+  '/random-games': jsonHandler.getRandomGameResponse,
+  '/home': htmlHandler.getBombHome,
+  '/app': htmlHandler.getBombApp,
+  '/random': htmlHandler.getBombRandom,
+  '/admin': htmlHandler.getBombAdmin,
+  '/css': htmlHandler.getDefaultCSS,
   notFound: htmlHandler.get404Response,
 };
 
