@@ -18,6 +18,9 @@ const urlStruct = {
   '/random': htmlHandler.getBombRandom,
   '/admin': htmlHandler.getBombAdmin,
   '/default-styles': htmlHandler.getDefaultCSS,
+  '/getUsers': jsonHandler.getUsers,
+  '/addUser': jsonHandler.addUser,
+  // Images
   '/red': htmlHandler.getRedImg,
   '/blue': htmlHandler.getBlueImg,
   '/mario-land': htmlHandler.getMarioLandImg,
@@ -31,6 +34,11 @@ const urlStruct = {
   '/mm3': htmlHandler.getMM3Img,
   '/mm4': htmlHandler.getMM4Img,
   '/mm5': htmlHandler.getMM5Img,
+  '/alleyway': htmlHandler.getAlleywayImg,
+  '/ff': htmlHandler.getFFAdventureImg,
+  '/dracula': htmlHandler.getKidDraculaImg,
+  '/metroid': htmlHandler.getMetroid2Img,
+  '/street': htmlHandler.getSF2Img,
 
   notFound: htmlHandler.get404Response,
 };
@@ -50,8 +58,6 @@ const onRequest = (request, response) => {
 
   const parsedUrl = url.parse(request.url);
   const { pathname } = parsedUrl;
-  // console.log('parsedUrl=', parsedUrl);
-  // console.log('pathname=', pathname);
 
   const params = query.parse(parsedUrl.query);
   // const { limit } = params;

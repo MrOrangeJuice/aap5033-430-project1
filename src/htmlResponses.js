@@ -19,6 +19,11 @@ const mm2Img = fs.readFileSync(`${__dirname}/../media/mm2.jpg`);
 const mm3Img = fs.readFileSync(`${__dirname}/../media/mm3.jpg`);
 const mm4Img = fs.readFileSync(`${__dirname}/../media/mm4.jpg`);
 const mm5Img = fs.readFileSync(`${__dirname}/../media/mm5.jpg`);
+const alleywayImg = fs.readFileSync(`${__dirname}/../media/alleyway.jpg`);
+const ffAdventureImg = fs.readFileSync(`${__dirname}/../media/ffadventure.jpg`);
+const kidDraculaImg = fs.readFileSync(`${__dirname}/../media/kidDracula.jpg`);
+const metroid2Img = fs.readFileSync(`${__dirname}/../media/metroid.jpg`);
+const sf2Img = fs.readFileSync(`${__dirname}/../media/sf2.jpg`);
 
 const get404Response = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/html' });
@@ -134,6 +139,36 @@ const getMM5Img = (request, response) => {
   response.end();
 };
 
+const getAlleywayImg = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+  response.write(alleywayImg);
+  response.end();
+};
+
+const getFFAdventureImg = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+  response.write(ffAdventureImg);
+  response.end();
+};
+
+const getKidDraculaImg = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+  response.write(kidDraculaImg);
+  response.end();
+};
+
+const getMetroid2Img = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+  response.write(metroid2Img);
+  response.end();
+};
+
+const getSF2Img = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+  response.write(sf2Img);
+  response.end();
+};
+
 module.exports.get404Response = get404Response;
 module.exports.getBombHome = getBombHome;
 module.exports.getBombApp = getBombApp;
@@ -153,3 +188,8 @@ module.exports.getMM2Img = getMM2Img;
 module.exports.getMM3Img = getMM3Img;
 module.exports.getMM4Img = getMM4Img;
 module.exports.getMM5Img = getMM5Img;
+module.exports.getAlleywayImg = getAlleywayImg;
+module.exports.getFFAdventureImg = getFFAdventureImg;
+module.exports.getKidDraculaImg = getKidDraculaImg;
+module.exports.getMetroid2Img = getMetroid2Img;
+module.exports.getSF2Img = getSF2Img;

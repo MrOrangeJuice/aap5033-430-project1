@@ -173,5 +173,28 @@ a:hover {
 	display: none;
 }
 
+form {
+	background-color: var(--secondary-bg-color);
+	padding: 10px;
+	border-radius: 10px;
+}
 
+.button {
+	background-color: var(--main-fg-color);
+	color: var(--secondary-bg-color);
+	font-size: 2rem;
+	font-family: 'Press Start 2P', sans-serif;
+	padding: 10px;
+	border-radius: 10px;
+	margin-top: 10px;
+	transition-duration: 0.2s;
+	border: none;
+}
+
+.button:hover {
+	transition-duration: 0.2s;
+	border-radius: 15px;
+	background-color: var(--secondary-fg-color);
+	color: var(--secondary-bg-color);
+}
 

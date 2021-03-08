@@ -1,24 +1,105 @@
 <html>
-  <head>
-    <title>Game Boye App</title>
-    <link href="/default-styles" type="text/css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <nav>
-      <ul>
-        <li><a href="/home" class="navbar">Home</a></li>
-        <li><a href="/app" class="navbar active">App</a></li>
-        <li><a href="/random" class="navbar">Random</a></li>
-        <li><a href="/admin" class="navbar">Admin</a></li>
-      </ul>
-      <hr>
-    </nav>
-    <header>
-      <h1>Game Boye App</h1>
-      <hr>
-    </header>
+
+<head>
+  <title>Game Boye App</title>
+  <link href="/default-styles" type="text/css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <script>
+    const parseJSON = (xhr, content) => {
+      if (xhr.response && xhr.getResponseHeader('Content-Type') === 'application/json') {
+        const obj = JSON.parse(xhr.response);
+        console.dir(obj);
+
+        if (obj.message) {
+          content.innerHTML += `<p>${obj.message}</p>`;
+        }
+      }
+    };
+
+    const handleResponse = (xhr) => {
+      const content = document.querySelector('#content');
+      
+      switch(xhr.status){
+      	case 200:
+      		content.innerHTML = '<b>Success!</b>';
+      		break;
+      	case 201:
+      		content.innerHTML = '<b>Created!</b>';
+      		break;
+      	case 204:
+      		content.innerHTML = '<b>Updated (No Content)!</b>';
+      		break;
+      	case 400:
+      		content.innerHTML = '<b>Bad Request!</b>';
+      		break;
+      	default:
+      		content.innerHTML = '<b>Error code not implemented by client</b>';
+      }
+      
+      parseJSON(xhr,content);
+    };
+
+    const sendPost = (e, nameForm) => {
+			e.preventDefault();
+			
+			const nameAction = nameForm.getAttribute("action");
+			const nameMethod = nameForm.getAttribute("method");
+			
+			const nameField = nameForm.querySelector("#nameField");
+			
+			const xhr = new XMLHttpRequest();
+			xhr.open(nameMethod,nameAction);
+			
+			xhr.setRequestHeader('Accept','application/json');
+			xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			
+			xhr.onload = () => handleResponse(xhr);
+			
+			const formData = `name=${nameField.value}`;
+			xhr.send(formData); 
+			
+			return false;
+    };
+
+    const init = () => {
+      const nameForm = document.querySelector('#nameForm');
+      
+      const addUser = (e) => sendPost(e, nameForm);
+      
+     	nameForm.addEventListener('submit', addUser);
+    };
+
+    window.onload = init;
+  </script>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="/home" class="navbar">Home</a></li>
+      <li><a href="/app" class="navbar active">App</a></li>
+      <li><a href="/random" class="navbar">Random</a></li>
+      <li><a href="/admin" class="navbar">Admin</a></li>
+    </ul>
+    <hr>
+  </nav>
+  <header>
+    <h1>Game Boye App</h1>
     
-  </body>
+    <hr>
+    <form id="userForm" action="/addUser" method="post">
+      <label for="name">Name: </label>
+      <input id="nameField" type="text" name="name"><br><br>
+      <input type="submit" value="Add User" class="button">
+    </form>
+
+    <div id="content">
+
+    </div>
+  </header>
+
+</body>
+
 </html>

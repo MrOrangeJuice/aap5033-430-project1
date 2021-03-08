@@ -9,7 +9,7 @@ const games = [
     title: 'Alleyway',
     developer: 'Intelligent Systems',
     year: '1989',
-    url: '/red',
+    url: '/alleyway',
   },
   {
     title: 'Game and Watch Gallery',
@@ -63,19 +63,19 @@ const games = [
     title: 'Kid Dracula',
     developer: 'Konami',
     year: '1993',
-    url: '/red',
+    url: '/dracula',
   },
   {
-    title: 'Space Invaders',
-    developer: 'Taito',
-    year: '1994',
-    url: '/red',
+    title: 'Street Fighter 2',
+    developer: 'Capcom',
+    year: '1995',
+    url: '/street',
   },
   {
     title: 'Metroid 2: Return of Samus',
     developer: 'Nintendo',
     year: '1991',
-    url: '/red',
+    url: '/metroid',
   },
   {
     title: 'Wario Land: Super Mario Land 3',
@@ -105,9 +105,57 @@ const games = [
     title: 'Final Fantasy Adventure',
     developer: 'Square',
     year: '1992',
-    url: '/red',
+    url: '/ff',
   },
 ];
+
+const respondJSON = (request, response, status, object) => {
+  response.writeHead(status, { 'Content-Type': 'application/json' });
+  response.write(JSON.stringify(object));
+  response.end();
+};
+
+const respondJSONMeta = (request, response, status) => {
+  response.writeHead(status, { 'Content-Type': 'application/json' });
+  response.end();
+};
+
+const users = {};
+
+const getUsers = (request, response) => {
+  const responseJSON = {
+    users,
+  };
+
+  respondJSON(request, response, 200, responseJSON);
+};
+
+const addUser = (request, response, body) => {
+  const responseJSON = {
+    message: 'Name is required',
+  };
+
+  if (!body.name) {
+    responseJSON.id = 'missingParams';
+    return respondJSON(request, response, 400, responseJSON);
+  }
+
+  let responseCode = 201;
+
+  if (users[body.name]) {
+    responseCode = 204;
+  } else {
+    users[body.name] = {};
+    users[body.name].name = body.name;
+  }
+
+  if (responseCode === 201) {
+    responseJSON.message = 'Created Successfully!';
+    return respondJSON(request, response, responseCode, responseJSON);
+  }
+
+  return respondJSONMeta(request, response, responseCode);
+};
 
 const getRandomGameResponse = (request, response, params, acceptedTypes, httpMethod) => {
   let type = 'application/json';
@@ -172,3 +220,5 @@ const getRandomGame = (limit = 1, request, response, type) => {
 };
 
 module.exports.getRandomGameResponse = getRandomGameResponse;
+module.exports.getUsers = getUsers;
+module.exports.addUser = addUser;
