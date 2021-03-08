@@ -4,7 +4,40 @@
     <link href="/default-styles" type="text/css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script>
 
+      const handleResponses = (e) => {
+        console.log("e.target =", e.target);
+        console.log("e.target.response = ", e.target.response);
+        const obj = JSON.parse(e.target.response);
+        console.log("obj=",obj);
+        let responseString = "";
+        for(let i = 0; i < obj.users.length; i++)
+        {
+            responseString += `
+            <div class="user">
+              <p>${obj.users[i].name}</p>
+            </div>
+            `;
+        }
+        document.querySelector('#admin').innerHTML = responseString;
+      }   
+
+      const downloadUsers = (e) => {
+        const userURL = "/getUsers";
+        const xhr = new XMLHttpRequest();
+        xhr.onload = handleResponses;
+        xhr.open("GET", userURL);
+        xhr.setRequestHeader('Accept', "application/javascript");
+        xhr.send();
+      }
+
+      const init = () => {
+        downloadUsers();
+      }
+
+      window.onload = init;
+    </script>
   </head>
   <body>
     <nav>
@@ -18,7 +51,12 @@
     </nav>
     <header>
       <h1>Game Boye Admin</h1>
+      <h2>See everything stored in the database</h2>
       <hr>
+
+      <div id="admin">
+
+      </div>
     </header>
     
   </body>

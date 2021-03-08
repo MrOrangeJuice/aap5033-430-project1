@@ -120,7 +120,17 @@ const respondJSONMeta = (request, response, status) => {
   response.end();
 };
 
-const users = {};
+const users = [
+  {
+    name: 'Alex',
+  },
+  {
+    name: 'Jeff',
+  },
+  {
+    name: 'Nester',
+  }
+];
 
 const getUsers = (request, response) => {
   const responseJSON = {
