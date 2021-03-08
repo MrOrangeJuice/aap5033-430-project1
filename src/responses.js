@@ -167,30 +167,6 @@ const addUser = (request, response, body) => {
   return respondJSONMeta(request, response, responseCode);
 };
 
-const getRandomGameResponse = (request, response, params, acceptedTypes, httpMethod) => {
-  let type = 'application/json';
-  if (acceptedTypes.includes('text/xml')) {
-    type = 'text/xml';
-  }
-
-  // Source: https://stackoverflow.com/questions/2219526/how-many-bytes-in-a-javascript-string/29955838
-  // Refactored to an arrow function by ACJ
-  const getBinarySize = (string) => Buffer.byteLength(string, 'utf8');
-
-  const headers = {
-    'Content-Type': 'application/json',
-    'Content-Length': getBinarySize,
-  };
-
-  if (httpMethod === 'HEAD') {
-    response.writeHead(200, headers);
-  } else {
-    response.writeHead(200, { 'Content-Type': type });
-    response.write(getRandomGame(params.limit, request, response, type));
-    response.end();
-  }
-};
-
 // 6 - this will return a random number no bigger than `max`, as a string
 // we will also doing our query parameter validation here
 const getRandomGame = (limit = 1, request, response, type) => {
@@ -227,6 +203,30 @@ const getRandomGame = (limit = 1, request, response, type) => {
   }
 
   return JSON.stringify(responseObj);
+};
+
+const getRandomGameResponse = (request, response, params, acceptedTypes, httpMethod) => {
+  let type = 'application/json';
+  if (acceptedTypes.includes('text/xml')) {
+    type = 'text/xml';
+  }
+
+  // Source: https://stackoverflow.com/questions/2219526/how-many-bytes-in-a-javascript-string/29955838
+  // Refactored to an arrow function by ACJ
+  const getBinarySize = (string) => Buffer.byteLength(string, 'utf8');
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Content-Length': getBinarySize,
+  };
+
+  if (httpMethod === 'HEAD') {
+    response.writeHead(200, headers);
+  } else {
+    response.writeHead(200, { 'Content-Type': type });
+    response.write(getRandomGame(params.limit, request, response, type));
+    response.end();
+  }
 };
 
 module.exports.getRandomGameResponse = getRandomGameResponse;
