@@ -129,7 +129,7 @@ const users = [
   },
   {
     name: 'Nester',
-  }
+  },
 ];
 
 const getUsers = (request, response) => {
