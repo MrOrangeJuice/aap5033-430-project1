@@ -14,6 +14,7 @@ const urlStruct = {
   '/random-game': jsonHandler.getRandomGameResponse,
   '/random-games': jsonHandler.getRandomGameResponse,
   '/home': htmlHandler.getBombHome,
+  '/': htmlHandler.getBombHome,
   '/app': htmlHandler.getBombApp,
   '/random': htmlHandler.getBombRandom,
   '/admin': htmlHandler.getBombAdmin,
