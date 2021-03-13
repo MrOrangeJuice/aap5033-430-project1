@@ -1,3 +1,4 @@
+// Game database
 const games = [
   {
     title: 'Super Mario Land',
@@ -107,8 +108,51 @@ const games = [
     year: '1992',
     url: '/ff',
   },
+  {
+    title: 'Balloon Kid',
+    developer: 'Pax Softnica',
+    year: '1990',
+    url: '/balloon',
+  },
+  {
+    title: 'Pokemon Yellow',
+    developer: 'Game Freak',
+    year: '1999',
+    url: '/yellow',
+  },
+  {
+    title: "Kirby's Dream Land 2",
+    developer: 'HAL Laboratory',
+    year: '1995',
+    url: '/kirby2',
+  },
+  {
+    title: 'Wario Blast: Featuring Bomberman!',
+    developer: 'Hudson Soft',
+    year: '1994',
+    url: '/warioblast',
+  },
+  {
+    title: 'Faceball 2000',
+    developer: 'Xanth Software',
+    year: '1991',
+    url: '/faceball',
+  },
+  {
+    title: 'Castlevania: The Adventure',
+    developer: 'Konami',
+    year: '1989',
+    url: '/castlevania',
+  },
+  {
+    title: 'King of Fighters 95',
+    developer: 'Gaibrain',
+    year: '1997',
+    url: '/kof',
+  },
 ];
 
+// respond JSON and respond JSON Meta
 const respondJSON = (request, response, status, object) => {
   response.writeHead(status, { 'Content-Type': 'application/json' });
   response.write(JSON.stringify(object));
@@ -120,43 +164,65 @@ const respondJSONMeta = (request, response, status) => {
   response.end();
 };
 
-const users = [
-  {
+// userList array (with some default values)
+const userList = {
+  Alex: {
     name: 'Alex',
+    collection: [
+      'kirby',
+      'kirby2',
+      'warioblast',
+    ],
   },
-  {
-    name: 'Jeff',
+  Jimmy: {
+    name: 'Jimmy',
+    collection: [
+      'mario-land',
+      'wario-land',
+      'castlevania',
+      'balloon',
+    ],
   },
-  {
-    name: 'Nester',
+  Ash: {
+    name: 'Ash',
+    collection: [
+      'red',
+      'blue',
+      'yellow',
+    ],
   },
-];
+};
 
+// Return userList array
 const getUsers = (request, response) => {
   const responseJSON = {
-    users,
+    userList,
   };
 
   respondJSON(request, response, 200, responseJSON);
 };
 
+// addUser
 const addUser = (request, response, body) => {
   const responseJSON = {
-    message: 'Name is required',
+    message: 'Name and game are required',
   };
 
-  if (!body.name) {
+  if (!body.name || !body.game) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
 
   let responseCode = 201;
 
-  if (users[body.name]) {
+  if (userList[body.name]) {
     responseCode = 204;
   } else {
-    users[body.name] = {};
-    users[body.name].name = body.name;
+    userList[body.name] = {};
+    userList[body.name].name = body.name;
+    userList[body.name].collection = [
+      body.game,
+    ];
   }
 
   if (responseCode === 201) {
@@ -167,8 +233,7 @@ const addUser = (request, response, body) => {
   return respondJSONMeta(request, response, responseCode);
 };
 
-// 6 - this will return a random number no bigger than `max`, as a string
-// we will also doing our query parameter validation here
+// return random game
 const getRandomGame = (limit = 1, request, response, type) => {
   let limit2 = Number(limit);
   limit2 = !limit2 ? 1 : limit2;

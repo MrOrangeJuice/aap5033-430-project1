@@ -6,23 +6,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <script>
 
+      // handle respondes for users
       const handleResponses = (e) => {
         console.log("e.target =", e.target);
         console.log("e.target.response = ", e.target.response);
         const obj = JSON.parse(e.target.response);
         console.log("obj=",obj);
         let responseString = "";
-        for(let i = 0; i < obj.users.length; i++)
+        for(var key in obj.userList)
         {
             responseString += `
             <div class="user">
-              <p>${obj.users[i].name}</p>
-            </div>
-            `;
+              <p>${obj.userList[key].name}</p>`
+            for(let j = 0; j < obj.userList[key].collection.length; j++)
+            {
+              responseString += `
+              <img src="${obj.userList[key].collection[j]}" alt="Box Art" class="boxartsmall">`;
+            }
+            responseString += `</div>`;
         }
         document.querySelector('#admin').innerHTML = responseString;
       }   
 
+      // Load data from /getUsers endpoint
       const downloadUsers = (e) => {
         const userURL = "/getUsers";
         const xhr = new XMLHttpRequest();
@@ -32,6 +38,7 @@
         xhr.send();
       }
 
+      // load users when page loads
       const init = () => {
         downloadUsers();
       }
@@ -53,11 +60,11 @@
       <h1>Game Boye Admin</h1>
       <h2>See everything stored in the database</h2>
       <hr>
+    </header>
 
       <div id="admin">
 
       </div>
-    </header>
     
   </body>
 </html>

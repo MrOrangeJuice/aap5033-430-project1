@@ -1,5 +1,6 @@
 const fs = require('fs');
 
+// Load in necessary files
 const errorPage = fs.readFileSync(`${__dirname}/../client/error.html`);
 const bombHome = fs.readFileSync(`${__dirname}/../client/bomb-home.html`);
 const bombApp = fs.readFileSync(`${__dirname}/../client/bomb-app.html`);
@@ -24,6 +25,13 @@ const ffAdventureImg = fs.readFileSync(`${__dirname}/../media/ffadventure.jpg`);
 const kidDraculaImg = fs.readFileSync(`${__dirname}/../media/kidDracula.jpg`);
 const metroid2Img = fs.readFileSync(`${__dirname}/../media/metroid.jpg`);
 const sf2Img = fs.readFileSync(`${__dirname}/../media/sf2.jpg`);
+const balloonImg = fs.readFileSync(`${__dirname}/../media/balloon.png`);
+const yellowImg = fs.readFileSync(`${__dirname}/../media/yellow.jpg`);
+const kirby2Img = fs.readFileSync(`${__dirname}/../media/kirby2.png`);
+const warioBlastImg = fs.readFileSync(`${__dirname}/../media/warioblast.jpg`);
+const faceballImg = fs.readFileSync(`${__dirname}/../media/faceball.jpg`);
+const castlevaniaImg = fs.readFileSync(`${__dirname}/../media/castlevania.jpg`);
+const kofImg = fs.readFileSync(`${__dirname}/../media/kof.jpg`);
 
 const get404Response = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/html' });
@@ -169,27 +177,78 @@ const getSF2Img = (request, response) => {
   response.end();
 };
 
-module.exports.get404Response = get404Response;
-module.exports.getBombHome = getBombHome;
-module.exports.getBombApp = getBombApp;
-module.exports.getBombAdmin = getBombAdmin;
-module.exports.getBombRandom = getBombRandom;
-module.exports.getDefaultCSS = getDefaultCSS;
-module.exports.getRedImg = getRedImg;
-module.exports.getBlueImg = getBlueImg;
-module.exports.getMarioLandImg = getMarioLandImg;
-module.exports.getMarioLand2Img = getMarioLand2Img;
-module.exports.getWarioLandImg = getWarioLandImg;
-module.exports.getKirbyImg = getKirbyImg;
-module.exports.getTetrisImg = getTetrisImg;
-module.exports.getGalleryImg = getGalleryImg;
-module.exports.getDK94Img = getDK94Img;
-module.exports.getMM2Img = getMM2Img;
-module.exports.getMM3Img = getMM3Img;
-module.exports.getMM4Img = getMM4Img;
-module.exports.getMM5Img = getMM5Img;
-module.exports.getAlleywayImg = getAlleywayImg;
-module.exports.getFFAdventureImg = getFFAdventureImg;
-module.exports.getKidDraculaImg = getKidDraculaImg;
-module.exports.getMetroid2Img = getMetroid2Img;
-module.exports.getSF2Img = getSF2Img;
+const getBalloonImg = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'image/png' });
+  response.write(balloonImg);
+  response.end();
+};
+
+const getYellowImg = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+  response.write(yellowImg);
+  response.end();
+};
+
+const getKirby2Img = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'image/png' });
+  response.write(kirby2Img);
+  response.end();
+};
+
+const getWarioBlastImg = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+  response.write(warioBlastImg);
+  response.end();
+};
+
+const getFaceballImg = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+  response.write(faceballImg);
+  response.end();
+};
+
+const getCastlevaniaImg = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+  response.write(castlevaniaImg);
+  response.end();
+};
+
+const getKOFImg = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'image/jpeg' });
+  response.write(kofImg);
+  response.end();
+};
+
+module.exports = {
+  get404Response,
+  getBombHome,
+  getBombApp,
+  getBombAdmin,
+  getBombRandom,
+  getDefaultCSS,
+  getRedImg,
+  getBlueImg,
+  getMarioLandImg,
+  getMarioLand2Img,
+  getWarioLandImg,
+  getKirbyImg,
+  getTetrisImg,
+  getGalleryImg,
+  getDK94Img,
+  getMM2Img,
+  getMM3Img,
+  getMM4Img,
+  getMM5Img,
+  getAlleywayImg,
+  getFFAdventureImg,
+  getKidDraculaImg,
+  getMetroid2Img,
+  getSF2Img,
+  getBalloonImg,
+  getYellowImg,
+  getKirby2Img,
+  getWarioBlastImg,
+  getFaceballImg,
+  getCastlevaniaImg,
+  getKOFImg,
+};

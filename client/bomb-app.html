@@ -7,6 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
   <script>
+    let currentUser = "";
+
+    // Parse JSON and update page with status
     const parseJSON = (xhr, content) => {
       if (xhr.response && xhr.getResponseHeader('Content-Type') === 'application/json') {
         const obj = JSON.parse(xhr.response);
@@ -18,29 +21,32 @@
       }
     };
 
+    // send out status codes
     const handleResponse = (xhr) => {
       const content = document.querySelector('#content');
       
       switch(xhr.status){
       	case 200:
-      		content.innerHTML = '<b>Success!</b>';
+      		content.innerHTML = '<b>Success!</b><br>';
       		break;
       	case 201:
-      		content.innerHTML = '<b>Created!</b>';
+      		content.innerHTML = '<b>Created!</b><br>';
       		break;
       	case 204:
-      		content.innerHTML = '<b>Updated (No Content)!</b>';
+      		content.innerHTML = '<b>Updated (No Content)!</b><br>';
       		break;
       	case 400:
-      		content.innerHTML = '<b>Bad Request!</b>';
+      		content.innerHTML = '<b>Bad Request!</b><br>';
       		break;
       	default:
-      		content.innerHTML = '<b>Error code not implemented by client</b>';
+      		content.innerHTML = '<b>Error code not implemented by client</b><br>';
       }
       
+      console.log(xhr.response);
       parseJSON(xhr,content);
     };
 
+    // send data from field
     const sendPost = (e, nameForm) => {
 			e.preventDefault();
 			
@@ -48,6 +54,7 @@
 			const nameMethod = nameForm.getAttribute("method");
 			
 			const nameField = nameForm.querySelector("#nameField");
+      const gameField = nameForm.querySelector("#gameField");
 			
 			const xhr = new XMLHttpRequest();
 			xhr.open(nameMethod,nameAction);
@@ -57,12 +64,13 @@
 			
 			xhr.onload = () => handleResponse(xhr);
 			
-			const formData = `name=${nameField.value}`;
+			const formData = `name=${nameField.value}&game=${gameField.value}`;
 			xhr.send(formData); 
 			
 			return false;
     };
 
+    // Bind button on window init
     const init = () => {
       const nameForm = document.querySelector('#nameForm');
       
@@ -90,9 +98,11 @@
     <h2>Login and add to your collection</h2>
     <hr>
     </header>
-    <form id="userForm" action="/addUser" method="post">
+    <form id="nameForm" action="/addUser" method="post">
       <label for="name">Name: </label>
-      <input id="nameField" type="text" name="name"><br><br>
+      <input id="nameField" type="text" name="game"><br><br>
+      <label for="game">Game: </label>
+      <input id="gameField" type="text" name="name"><br><br>
       <input type="submit" value="Add User" class="button">
     </form>
 

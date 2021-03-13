@@ -8,10 +8,7 @@
   <script>
 
     const handleResponse = (e) => {
-        console.log("e.target =", e.target); // here, 'e.target' is the 'xhr' object
-        console.log("e.target.response = ", e.target.response); // so that means this is a string of "game" JSON
         const obj = JSON.parse(e.target.response); // turn it back into an object
-        console.log("obj=",obj);
         // now go ahead and update #gameContainer
         document.querySelector('#gameContainer').innerHTML = `
         <div class="game">
@@ -24,10 +21,7 @@
     }       
     
     const handle5Responses = (e) => {
-        console.log("e.target =", e.target); // here, 'e.target' is the 'xhr' object
-        console.log("e.target.response = ", e.target.response); // so that means this is a string of "game" JSON
         const obj = JSON.parse(e.target.response); // turn it back into an object
-        console.log("obj=",obj);
         // now go ahead and update #gamesContainer
         let responseString = "";
         for(let i = 0; i < 5; i++)

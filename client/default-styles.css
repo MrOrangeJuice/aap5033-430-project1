@@ -46,6 +46,11 @@ h2 {
 	margin: 10px;
 }
 
+.boxartsmall {
+	width: 30%;
+	margin: 5px;
+}
+
 ul {
 	list-style-type: none;
 	margin: 0;
@@ -58,6 +63,7 @@ li {
 
 .navbar {
 	font-size: 2rem;
+	padding: 6px;
 }
 
 .active {
@@ -205,5 +211,11 @@ form {
 	margin: 15px;
 	width: 75%;
 	margin-left: 12.5%;
+	transition-duration: 0.2s;
+}
+
+.user:hover {
+	transition-duration: 0.2s;
+	background-color: var(--tertiary-fg-color);
 }
 

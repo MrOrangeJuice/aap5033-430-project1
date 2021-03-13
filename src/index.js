@@ -1,15 +1,17 @@
 // console.log('Random joke service starting up ...');
 
-// 1 - pull in the HTTP server module
+// Pull in the HTTP server module
 const http = require('http');
 
-// 2 - pull in URL and query modules (for URL parsing)
+// Pull in URL and query modules (for URL parsing)
 const url = require('url');
 const query = require('querystring');
 
+// Load html and json handlers
 const htmlHandler = require('./htmlResponses');
 const jsonHandler = require('./responses');
 
+// Endpoint list
 const urlStruct = {
   '/random-game': jsonHandler.getRandomGameResponse,
   '/random-games': jsonHandler.getRandomGameResponse,
@@ -19,8 +21,6 @@ const urlStruct = {
   '/random': htmlHandler.getBombRandom,
   '/admin': htmlHandler.getBombAdmin,
   '/default-styles': htmlHandler.getDefaultCSS,
-  '/getUsers': jsonHandler.getUsers,
-  '/addUser': jsonHandler.addUser,
   // Images
   '/red': htmlHandler.getRedImg,
   '/blue': htmlHandler.getBlueImg,
@@ -40,16 +40,50 @@ const urlStruct = {
   '/dracula': htmlHandler.getKidDraculaImg,
   '/metroid': htmlHandler.getMetroid2Img,
   '/street': htmlHandler.getSF2Img,
+  '/balloon': htmlHandler.getBalloonImg,
+  '/kirby2': htmlHandler.getKirby2Img,
+  '/yellow': htmlHandler.getYellowImg,
+  '/warioblast': htmlHandler.getWarioBlastImg,
+  '/faceball': htmlHandler.getFaceballImg,
+  '/castlevania': htmlHandler.getCastlevaniaImg,
+  '/kof': htmlHandler.getKOFImg,
 
   notFound: htmlHandler.get404Response,
 };
 
-// 3 - locally this will be 3000, on Heroku it will be assigned
+// Create port
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
-// 7 - this is the function that will be called every time a client request comes in
-// this time we will look at the `pathname`, and send back the appropriate page
-// note that in this course we'll be using arrow functions 100% of the time in our server-side code
+const handlePost = (request, response, parsedUrl) => {
+  if (parsedUrl.pathname === '/addUser') {
+    const body = [];
+
+    // https://nodejs.org/api/http.html
+    request.on('error', () => {
+      response.statusCode = 400;
+      response.end();
+    });
+
+    request.on('data', (chunk) => {
+      body.push(chunk);
+    });
+
+    request.on('end', () => {
+      const bodyString = Buffer.concat(body).toString();
+      const bodyParams = query.parse(bodyString);
+
+      jsonHandler.addUser(request, response, bodyParams);
+    });
+  }
+};
+
+const handleGet = (request, response, parsedUrl) => {
+  if (parsedUrl.pathname === '/getUsers') {
+    jsonHandler.getUsers(request, response);
+  }
+};
+
+// handle client request
 const onRequest = (request, response) => {
   // console.log(request.headers);
   let acceptedTypes = request.headers.accept && request.headers.accept.split(',');
@@ -63,14 +97,16 @@ const onRequest = (request, response) => {
   const params = query.parse(parsedUrl.query);
   // const { limit } = params;
 
-  if (urlStruct[pathname]) {
+  if (pathname === '/addUser') {
+    handlePost(request, response, parsedUrl);
+  } else if (pathname === '/getUsers') {
+    handleGet(request, response, parsedUrl);
+  } else if (urlStruct[pathname]) {
     urlStruct[pathname](request, response, params, acceptedTypes, httpMethod);
   } else {
     urlStruct.notFound(request, response, params, acceptedTypes, httpMethod);
   }
 };
 
-// 8 - create the server, hook up the request handling function, and start listening on `port`
+// create the server, hook up the request handling function, and start listening on `port`
 http.createServer(onRequest).listen(port);
-
-// console.log(`Listening on 127.0.0.1: ${port}`);
